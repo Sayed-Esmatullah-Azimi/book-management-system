@@ -1,0 +1,28 @@
+services:
+  frontend:
+    build:
+      context: ./book-management-frontend  # مسیر نسبی به پوشه پروژه فرانت‌اند
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: ./book-management-backend   # مسیر نسبی به پوشه پروژه بک‌اند
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=development
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
